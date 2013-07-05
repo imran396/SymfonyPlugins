@@ -52,13 +52,13 @@ border:1px solid #7d99ca; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 </style>
 
 
+
 <div class="top_roll">
       <form class="form-horizontal" method="post">
 
-
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="Name">Name</label>
+  <label class="control-label" for="Name"><?php echo ($lang === 'en')?'Name':'名前'?></label>
   <div class="controls">
     <input id="Name" name="name" type="text" placeholder="" class="input-xlarge" value = "<?php echo $name = !empty($name) ? $name: '';?>">
   </div>
@@ -67,7 +67,7 @@ border:1px solid #7d99ca; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="Email">Email</label>
+  <label class="control-label" for="Email"><?php echo ($lang === 'en')?'Email':'メール'?></label>
   <div class="controls">
     <input id="Email" name="pc_address" type="text" placeholder="" class="input-xlarge" value="<?php echo $email = !empty($email) ? $email: '';?>">
   </div>
@@ -76,7 +76,7 @@ border:1px solid #7d99ca; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 
 <!-- Password input-->
 <div class="control-group">
-  <label class="control-label" for="password">Password </label>
+  <label class="control-label" for="password"><?php echo ($lang === 'en')?'Password':'パスワード'?> </label>
   <div class="controls">
     <input id="password" name="password" type="password" placeholder="" class="input-xlarge" value="<?php echo $password = !empty($password) ? $password: '';?>">
   </div>
@@ -85,7 +85,7 @@ border:1px solid #7d99ca; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 
 <!-- Password input-->
 <div class="control-group">
-  <label class="control-label" for="cpasswordinput">ReType-Password </label>
+  <label class="control-label" for="cpasswordinput"><?php echo ($lang === 'en')?'ReType-Password':'再入力し、パスワード'?> </label>
   <div class="controls">
     <input id="cpasswordinput" name="cpasswordinput" type="password" placeholder="" class="input-xlarge" value="<?php echo $cpassword = !empty($cpassword) ? $cpassword: '';?>">
   </div>
@@ -94,7 +94,7 @@ border:1px solid #7d99ca; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="phone">Phone Number</label>
+  <label class="control-label" for="phone"><?php echo ($lang === 'en')?'Phone Number':'電話番号'?></label>
   <div class="controls">
     <input id="phone" name="phone" type="text" placeholder="" class="input-xlarge" value="<?php echo $phone = !empty($phone) ? $phone: '';?>">
 
@@ -104,21 +104,21 @@ border:1px solid #7d99ca; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 
 <!-- Select Basic -->
 <div class="control-group">
-  <label class="control-label" for="secretq">Secret Question</label>
+  <label class="control-label" for="secretq"><?php echo ($lang === 'en')?'Secret Question':'秘密の質問'?></label>
   <div class="controls">
     <select id="secretq" name="secret_question" class="input-xlarge">
-        <option value="1">Maiden name of the father or mother?</option>
-        <option value="2"> The last 5 digits of driver's license number? </option>
-        <option value="3"> Name of the person of first love?</option>
-        <option value="4"> The name of the elementary school you graduated?</option>
-        <option value="5"> State name of permanent address it?</option>
+        <option value="1"><?php echo ($lang === 'en')?'Maiden name of the father or mother?':'父または母の旧姓？'?></option>
+        <option value="2"><?php echo ($lang === 'en')?' The last 5 digits of driver\'s license number?':'運転免許証番号の下 5 桁は？'?></option>
+        <option value="3"><?php echo ($lang === 'en')?'The name of the first love?':'初恋の人の名前？'?></option>
+        <option value="4"><?php echo ($lang === 'en')?'The name of the elementary school you graduated?':'小学校の名前はあなたは卒業？'?></option>
+        <option value="5"> <?php echo ($lang === 'en')?'State name of permanent address it?':'本籍地の都道府県名、それ？'?></option>
     </select>
   </div>
 </div>
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="secret_ans">Secret Question Answer </label>
+  <label class="control-label" for="secret_ans"><?php echo ($lang === 'en')?'Secret Question Answer':'秘密の質問回答'?> </label>
   <div class="controls">
     <input id="secret_ans" name="secret_answer" type="text" placeholder="" class="input-xlarge" value="<?php echo $secretanswer = !empty($secretanswer) ? $secretanswer: '';?>">
   </div>
@@ -129,7 +129,7 @@ border:1px solid #7d99ca; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 <div class="control-group" style="">
   <label class="control-label" for="regbutton">&nbsp;&nbsp;&nbsp;</label>
   <div class="controls">
-    <button id="regbutton" name="singlebutton" class="btn btn-primary">submit</button>
+    <button id="regbutton" name="singlebutton" class="btn btn-primary"><?php echo ($lang === 'en')?'Submit':'提出する'?></button>
   </div>
 </div>
 

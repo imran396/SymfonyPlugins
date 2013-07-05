@@ -23,6 +23,7 @@ class registrationActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
      $client = new Services_Twilio($this->AccountSid, $this->AuthToken);
+      $this->lang = $this->getUser()->getCulture();
     if($request->isMethod(sfWebRequest::POST)){
         $formdata =  $this->validation($_POST);
         $this->bindPostDataIntoFrom($_POST);
@@ -33,7 +34,7 @@ class registrationActions extends sfActions
          $member_id = $obj->getId();
          $obj->generateApiKey();
          $apiKey = $obj->getApiKey();
-         $_POST['api_key'] =  $apiKey;
+         //$_POST['api_key'] =  $apiKey;
          $_POST['password']= md5($_POST['password']);
          $name = $_POST['name'];
          unset($_POST['name']);
@@ -41,6 +42,8 @@ class registrationActions extends sfActions
          unset($_POST['cpasswordinput']);
          $verify_key = $member_id.'C'.mt_rand(1, 9999);
          $_POST['telephone_auth'] =  $verify_key;
+         $_POST['phone'] =  substr($_POST['phone'],1);
+         $_POST['phone'] =  '+81'.$_POST['phone'];
 
     foreach($_POST as $key => $val ){
          $namvaluehasKey = $this->generateNameValueHash($key,$val);
@@ -75,72 +78,88 @@ class registrationActions extends sfActions
   {
         $member  = new Member();
         $cofigobj = new MemberConfig();
+      $this->lang = $this->getUser()->getCulture();
 
       if($request->isMethod(sfWebRequest::POST)){
            $varified = $_POST['verificatincode'];
-           $q = Doctrine::getTable('MemberConfig')->createQuery('mc')->where('mc.value = ?', $varified);
-           $memberconfig = $q->fetchArray();
-           $id = $memberconfig[0]['member_id'];
+          if(!empty($varified)){
+           $id = $this->checkVerfied($varified);
+           if(empty($id)){
+               $this->invalidMessage = $this->lang==='en'?'Invalid Verifaction Code':'無効な確認コード';
+           }
           if($id){
              Doctrine_Query::create()
               ->update('Member m')
               ->set('m.is_active', '?', 1)
               ->where('m.id = ?', $id)
              ->execute();
+              $this->verifysuccess = 'success';
              $this->redirect('/');
        }
   }
+ }
 }
- private function validation($formData){
+
+    public function checkVerfied($varified)
+    {
+        $q = Doctrine::getTable('MemberConfig')->createQuery('mc')->where('mc.value = ?', $varified);
+        $memberconfig = $q->fetchArray();
+        $id = $memberconfig[0]['member_id'];
+
+        return $id;
+    }
+
+    private function validation($formData){
+     $this->lang = $this->getUser()->getCulture();
      $validationData = '';
     if($formData['name'] == ''){
-        $this->msgName = 'Please Input Name';
+        $this->msgName = $this->lang === 'en'?'Please Input Name':'入力名をください';
         $validationData .=  $this->msgName;
     }
     if($formData['password'] == ''){
-        $this->msgPass = 'Please Input Password';
+        $this->msgPass = $this->lang === 'en'?'Please Input Password':'パスワード入力してください';
         $validationData .= $this->msgPass;
     }
 
    if($formData['cpasswordinput'] == ''){
-        $this->msgCpass = 'Please Input Confirm Password';
+        $this->msgCpass = $this->lang==='en'?'Please Input Confirm Password':'パスワードの確認を入力してください';
         $validationData .=$this->msgCpass;
     }
     if(!empty($formData['cpasswordinput'])&!empty($formData['password'])){
         if($formData['cpasswordinput'] != $formData['password']){
-            $this->msgCpass = 'Password Dosen\'t Matches';
+            $this->msgCpass = $this->lang === 'en'?'Password Dosen\'t Matches':'パスワードと一致しません';
             $validationData .=$this->msgCpas;
         }
     }
 
     if($formData['phone'] == ''){
-        $this->msgPhone = 'Please Input Phone Number';
+        $this->msgPhone = $this->lang == 'en'?'Please Input Phone Number':'入力電話番号してください';
         $validationData .= $this->msgPhone;
     }
     if(!empty($formData['phone'])){
         if($this->existsPhoneNumber($formData['phone'])){
-            $this->msgPhone = 'This Phone Number Is Already Verified';
+            $this->msgPhone = $this->lang === 'en'?'This Phone Number Is Already Verified':'この電話番号は、既に検証され';
             $validationData .= $this->msgPhone;
         }
     }
     if($formData['pc_address'] == ''){
-        $this->msgEmail = 'Please Input Email Address';
+        $this->msgEmail = $this->lang === 'en'?'Please Input Email Address':'入力メールアドレスにしてください';
         $validationData .= $this->msgEmail;
     }
     if($formData['pc_address']){
          if(!$this->isValidEmail($formData['pc_address'])){
-           $this->msgEmail = 'The Email Address Is Not Valid';
+           $this->msgEmail = $this->lang === 'en'?'The Email Address Is Not Valid':'電子メールアドレスが有効ではありません';
            $validationData .= $this->msgEmail;
          }
 
         if($this->existsEmail($formData['pc_address'])){
-             $this->msgEmail = 'The Email Address is already Exists';
+             $this->msgEmail = $this->lang === 'en'?'The Email Address is already Exists':'電子メールアドレスは既に存在している';
              $validationData .= $this->msgEmail;
          }
     }
 
     if($formData['secret_answer'] == ''){
-        $this->msgSecret = 'Please Answer Secret Question';
+        $this->msgSecret = $this->lang === 'en'?'Please Answer Secret Question':'秘密の質問に答えてください';
         $validationData .= $this->msgSecret;
     }
     return $validationData ;
