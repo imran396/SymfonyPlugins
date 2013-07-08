@@ -85,7 +85,7 @@ border:1px solid #7d99ca; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 
 <!-- Password input-->
 <div class="control-group">
-  <label class="control-label" for="cpasswordinput"><?php echo ($lang === 'en')?'ReType-Password':'再入力し、パスワード'?> </label>
+  <label class="control-label" for="cpasswordinput"><?php echo ($lang === 'en')?'ReType-Password':'パスワード再入力'?> </label>
   <div class="controls">
     <input id="cpasswordinput" name="cpasswordinput" type="password" placeholder="" class="input-xlarge" value="<?php echo $cpassword = !empty($cpassword) ? $cpassword: '';?>">
   </div>
@@ -107,11 +107,11 @@ border:1px solid #7d99ca; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
   <label class="control-label" for="secretq"><?php echo ($lang === 'en')?'Secret Question':'秘密の質問'?></label>
   <div class="controls">
     <select id="secretq" name="secret_question" class="input-xlarge">
-        <option value="1"><?php echo ($lang === 'en')?'Maiden name of the father or mother?':'父または母の旧姓？'?></option>
+        <option value="1"><?php echo ($lang === 'en')?'Maiden name of the father or mother?':'父または母の旧姓は？'?></option>
         <option value="2"><?php echo ($lang === 'en')?' The last 5 digits of driver\'s license number?':'運転免許証番号の下 5 桁は？'?></option>
-        <option value="3"><?php echo ($lang === 'en')?'The name of the first love?':'初恋の人の名前？'?></option>
-        <option value="4"><?php echo ($lang === 'en')?'The name of the elementary school you graduated?':'小学校の名前はあなたは卒業？'?></option>
-        <option value="5"> <?php echo ($lang === 'en')?'State name of permanent address it?':'本籍地の都道府県名、それ？'?></option>
+        <option value="3"><?php echo ($lang === 'en')?'The name of the first love?':'初恋の人の名前は？'?></option>
+        <option value="4"><?php echo ($lang === 'en')?'The name of the elementary school you graduated?':'あなたが卒業した小学校の名前は？'?></option>
+        <option value="5"> <?php echo ($lang === 'en')?'State name of permanent address it?':'本籍地の都道府県名は？'?></option>
     </select>
   </div>
 </div>
@@ -129,7 +129,7 @@ border:1px solid #7d99ca; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 <div class="control-group" style="">
   <label class="control-label" for="regbutton">&nbsp;&nbsp;&nbsp;</label>
   <div class="controls">
-    <button id="regbutton" name="singlebutton" class="btn btn-primary"><?php echo ($lang === 'en')?'Submit':'提出する'?></button>
+    <button id="regbutton" name="singlebutton" class="btn btn-primary"><?php echo ($lang === 'en')?'Send':' 送信する'?></button>
   </div>
 </div>
 

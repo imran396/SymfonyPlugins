@@ -58,7 +58,8 @@ class registrationActions extends sfActions
      $sms = $client->account->sms_messages->create(
             "+1 857-777-5778",
             trim($_POST['phone']),
-            "Hey $name, for verificatin to space share please enter $verify_key into input box"
+            " 登録ありがとうございます。
+                認証のため、次のコードを入力して下さい。 $verify_key"
         );
 
       unset($_POST);
@@ -113,7 +114,7 @@ class registrationActions extends sfActions
      $this->lang = $this->getUser()->getCulture();
      $validationData = '';
     if($formData['name'] == ''){
-        $this->msgName = $this->lang === 'en'?'Please Input Name':'入力名をください';
+        $this->msgName = $this->lang === 'en'?'Please Input Name':'名前を入力して下さい';
         $validationData .=  $this->msgName;
     }
     if($formData['password'] == ''){
@@ -133,7 +134,7 @@ class registrationActions extends sfActions
     }
 
     if($formData['phone'] == ''){
-        $this->msgPhone = $this->lang == 'en'?'Please Input Phone Number':'入力電話番号してください';
+        $this->msgPhone = $this->lang == 'en'?'Please Input Phone Number':'電話番号を入力してください';
         $validationData .= $this->msgPhone;
     }
     if(!empty($formData['phone'])){
@@ -143,12 +144,12 @@ class registrationActions extends sfActions
         }
     }
     if($formData['pc_address'] == ''){
-        $this->msgEmail = $this->lang === 'en'?'Please Input Email Address':'入力メールアドレスにしてください';
+        $this->msgEmail = $this->lang === 'en'?'Please Input Email Address':'メールアドレスを入力してください';
         $validationData .= $this->msgEmail;
     }
     if($formData['pc_address']){
          if(!$this->isValidEmail($formData['pc_address'])){
-           $this->msgEmail = $this->lang === 'en'?'The Email Address Is Not Valid':'電子メールアドレスが有効ではありません';
+           $this->msgEmail = $this->lang === 'en'?'The Email Address Is Not Valid':'その電子メールアドレスは既に登録されています';
            $validationData .= $this->msgEmail;
          }
 
