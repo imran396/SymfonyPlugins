@@ -11,7 +11,7 @@
           <p class="text_center mt30"><?php echo $lang === 'en'?'We have sent verification code in your moble phone. Please verify with this code for first time logged in':'私達はあなたの頭をすっぽり包む携帯電話に確認コードを送信しました。ログインして初めて、このコードで確認してください'?> </p>
 
         <div class="soushin_btn mt20">
-            <input type="submit" value="<?php echo ($lang === 'en')?'Submit':'提出する'?>">
+            <input type="submit" value="<?php echo ($lang === 'en')?'Send':'送信する'?>">
          </div>
  </form>
 </div>
