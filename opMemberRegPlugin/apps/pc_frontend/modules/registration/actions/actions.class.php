@@ -118,7 +118,7 @@ class registrationActions extends sfActions
         $validationData .=  $this->msgName;
     }
     if($formData['password'] == ''){
-        $this->msgPass = $this->lang === 'en'?'Please Input Password':'パスワード入力してください';
+        $this->msgPass = $this->lang === 'en'?'Please Input Password':'パスワードを入力して下さい';
         $validationData .= $this->msgPass;
     }
 
@@ -154,7 +154,7 @@ class registrationActions extends sfActions
          }
 
         if($this->existsEmail($formData['pc_address'])){
-             $this->msgEmail = $this->lang === 'en'?'The Email Address is already Exists':'電子メールアドレスは既に存在している';
+             $this->msgEmail = $this->lang === 'en'?'The Email Address is already Exists':'その電子メールアドレスは既に登録されています';
              $validationData .= $this->msgEmail;
          }
     }
